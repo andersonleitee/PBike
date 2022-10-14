@@ -1,5 +1,8 @@
 package controller;
 
+import infrastructure.ExceptionLength;
+import infrastructure.ExceptionNumber;
+import infrastructure.ExceptionPassNumber;
 import model.User;
 
 public class UserManager {
@@ -16,16 +19,24 @@ public class UserManager {
 
     private boolean loginValidate(String login){
         // login string validate
-        if(login.length() > 12 ||
-                login.length() <= 0){
-            return false;
+        try {
+            if (login.length() > 12 ||
+                    login.length() <= 0) {
+                throw new ExceptionLength(login.length());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        for(char c : login.toCharArray()){
-            for(int n : NUMBERS) {
-                if (Integer.parseInt(String.valueOf(c)) == n)
-                    return false;
+        try {
+            for (char c : login.toCharArray()) {
+                for (int n : NUMBERS) {
+                    if (Integer.parseInt(String.valueOf(c)) == n)
+                        throw new ExceptionNumber(n);
+                }
             }
+        } catch (NumberFormatException | ExceptionNumber e) {
+            e.printStackTrace();
         }
 
         return true;
@@ -33,21 +44,28 @@ public class UserManager {
 
     private boolean passwordValidate(String password){
         // password string validate
-        if(password.length() > 20 ||
-                password.length() < 8){
-            return false;
-        }
-
-        int numbersCount = 0;
-        for(char c : password.toCharArray()) {
-            for (int n : NUMBERS) {
-                if (Integer.parseInt(String.valueOf(c)) == n)
-                    numbersCount++;
+        try {
+            if (password.length() > 20 ||
+                    password.length() < 8) {
+                throw new ExceptionLength(password.length());
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if(numbersCount < 2)
-            return false;
 
+        try {
+            int numbersCount = 0;
+            for (char c : password.toCharArray()) {
+                for (int n : NUMBERS) {
+                    if (Integer.parseInt(String.valueOf(c)) == n)
+                        numbersCount++;
+                }
+            }
+            if (numbersCount < 2)
+                throw new ExceptionPassNumber(numbersCount);
+        } catch (NumberFormatException | ExceptionPassNumber e) {
+            e.printStackTrace();
+        }
         return true;
     }
 }
