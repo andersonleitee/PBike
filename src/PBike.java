@@ -1,10 +1,10 @@
-import view.UserForm;
+import view.UserManager;
 
 import java.util.Scanner;
 
 
 public class PBike {
-    private static UserForm userForm;
+    private static UserManager userManager;
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class PBike {
             switch (choice) {
 
                 case 1:
-                    System.out.println(userForm.HttpRequest_GET());
+                    System.out.println(userManager.HttpRequest_GET());
 
                     break;
                 case 2:
@@ -38,20 +38,20 @@ public class PBike {
                     System.out.println("Type here the user password: ");
                     password = scanner.nextLine();
 
-                    userForm.HttpRequest_POST(userForm.createUser());
+                    userManager.HttpRequest_POST(userManager.createUser());
                     break;
                 case 3:
-                    System.out.println("Type here th user id to be updated");
+                    System.out.println("Type here the user id to be updated");
                     id = scanner.nextLong();
 
-                    userForm.HttpRequest_PUT(id, userForm.createUser());
+                    userManager.HttpRequest_PUT(id, userManager.createUser());
 
                     break;
                 case 4:
-                    System.out.println("Type here th user id to be deleted");
+                    System.out.println("Type here the user id to be deleted");
                     id = scanner.nextLong();
 
-                    userForm.HttpRequest_DELETE(id);
+                    userManager.HttpRequest_DELETE(id);
                     break;
 
                 case 0:
