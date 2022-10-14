@@ -9,6 +9,9 @@ public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
     private final int[] NUMBERS = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
+    public UserManager(){
+    }
+
     public ArrayList<User> HttpRequest_GET(){
         return this.users;
     }
