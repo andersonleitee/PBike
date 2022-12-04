@@ -1,9 +1,11 @@
-package view;
+package controller;
 
+import infrastructure.ExceptionLength;
+import infrastructure.ExceptionNumber;
+import infrastructure.ExceptionPassNumber;
 import model.User;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
@@ -12,15 +14,15 @@ public class UserManager {
     public UserManager(){
     }
 
-    public ArrayList<User> HttpRequest_GET(){
+    public ArrayList<User> get(){
         return this.users;
     }
 
-    public ArrayList<User> HttpRequest_GETBYNAME(String name){
+    public ArrayList<User> getByName(String name){
         return this.users;
     }
 
-    public boolean HttpRequest_POST(User u){
+    public boolean post(User u){
         if(this.validateUser(u)) {
             this.users.add(u);
             return true;
@@ -29,7 +31,7 @@ public class UserManager {
 
     }
 
-    public boolean HttpRequest_PUT(Long id, User u){
+    public boolean put(Long id, User u){
         if(this.validateUser(u) && id > 0) {
             users.set(id.intValue(), u);
 
@@ -39,7 +41,7 @@ public class UserManager {
 
     }
 
-    public User HttpRequest_DELETE(Long id){
+    public User delete(Long id){
         User u = null;
 
         if(id > 0){
@@ -52,24 +54,7 @@ public class UserManager {
         return u;
     }
 
-    private boolean validateUser(User user){
-        return this.userValidate(user);
-    }
-
-    public User createUser(){
-        Scanner scanner = new Scanner(System.in);
-        String login, password;
-
-        System.out.println("Type here the user login: ");
-        login = scanner.nextLine();
-
-        System.out.println("Type here the user password: ");
-        password = scanner.nextLine();
-
-        return new User(login, password);
-    }
-
-    public boolean userValidate(User user){
+    public boolean validateUser(User user){
         boolean response = true;
 
         response = this.loginValidate(user.getLogin()) &&
