@@ -4,6 +4,8 @@ import infrastructure.ExceptionLength;
 import infrastructure.ExceptionNumber;
 import infrastructure.ExceptionPassNumber;
 import model.User;
+import model.Dock;
+import model.Bike;
 
 import java.util.ArrayList;
 
@@ -61,6 +63,36 @@ public class UserManager {
                     this.passwordValidate(user.getPassword());
 
         return response;
+    }
+
+    public boolean takeBike(Long id, Bike bike){
+        try {
+            u = users.get(id.intValue());
+            if(bike.getTaken()) {
+                return false;
+            }
+            u.setBike(bike);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean returnBike(Long id, Dock dock){
+        try {
+            u = users.get(id.intValue());
+            if(u.getBike() == null || dock.addBike(u.getBike()) == false) {
+                return false;
+            }
+            u.setBike(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
     private boolean loginValidate(String login){
