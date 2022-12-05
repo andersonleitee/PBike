@@ -1,6 +1,9 @@
-package model;
+package model.user;
 
-public class User {
+
+import factory.Entity;
+
+public class User implements Entity {
     private String login;
     private String password;
 

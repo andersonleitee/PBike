@@ -3,7 +3,7 @@ package controller;
 import infrastructure.ExceptionLength;
 import infrastructure.ExceptionNumber;
 import infrastructure.ExceptionPassNumber;
-import model.User;
+import model.user.User;
 
 import java.util.ArrayList;
 
@@ -67,7 +67,7 @@ public class UserManager {
         // login string validate
         try {
             if (login.length() > 12 ||
-                    login.length() <= 0) {
+                    login.length() == 0) {
                 throw new ExceptionLength(login.length());
             }
         } catch (Exception e) {
