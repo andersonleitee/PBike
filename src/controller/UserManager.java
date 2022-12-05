@@ -6,10 +6,11 @@ import infrastructure.ExceptionPassNumber;
 import model.user.User;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
-    private final int[] NUMBERS = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    private final int MAX_NUM = 9;
 
     public UserManager(){
     }
@@ -18,8 +19,14 @@ public class UserManager {
         return this.users;
     }
 
-    public ArrayList<User> getByName(String name){
-        return this.users;
+    public ArrayList<User> getByLogin(String login){
+        ArrayList<User> selected = new ArrayList<>();
+
+        for(User u : users){
+            if(Objects.equals(u.getLogin(), login))
+                selected.add(u);
+        }
+        return selected;
     }
 
     public boolean post(User u){
@@ -76,9 +83,9 @@ public class UserManager {
 
         try {
             for (char c : login.toCharArray()) {
-                for (int n : NUMBERS) {
-                    if (Integer.parseInt(String.valueOf(c)) == n)
-                        throw new ExceptionNumber(n);
+                for (int i = 0; i <= MAX_NUM; i++) {
+                    if (Integer.parseInt(String.valueOf(c)) == i)
+                        throw new ExceptionNumber(i);
                 }
             }
         } catch (NumberFormatException | ExceptionNumber e) {
@@ -102,8 +109,8 @@ public class UserManager {
         try {
             int numbersCount = 0;
             for (char c : password.toCharArray()) {
-                for (int n : NUMBERS) {
-                    if (Integer.parseInt(String.valueOf(c)) == n)
+                for (int i = 0; i <= MAX_NUM; i++) {
+                    if (Integer.parseInt(String.valueOf(c)) == i)
                         numbersCount++;
                 }
             }
