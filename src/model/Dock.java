@@ -29,18 +29,27 @@ public class Dock {
         this.capacity = capacity;
     }
 
-    public void addBike(Bike bike) {
-        bikes.add(bike);
+    public boolean addBike(Bike bike) {
+        if (bikes.size() < capacity) {
+            bikes.add(bike);
+
+            return true;
+        }
+
+        return false;
     }
 
-    public void removeBike(int id) {
+    public boolean removeBike(int id) {
         for (int i = 0; i < bikes.size(); i++) {
             if (bikes.get(i).getId() == id)
             {
                 bikes.remove(i);
-                break;
+                
+                return true;
             }
         }
+
+        return false;
     }
 
     public boolean hasBike(int id) {
@@ -50,6 +59,7 @@ public class Dock {
                 return true;
             }
         }
+        
         return false;
     }
 
