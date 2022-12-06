@@ -4,6 +4,8 @@ import infrastructure.ExceptionLength;
 import infrastructure.ExceptionNumber;
 import infrastructure.ExceptionPassNumber;
 import model.user.User;
+import model.Dock;
+import model.Bike;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -11,66 +13,95 @@ import java.util.Objects;
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
     private final int MAX_NUM = 9;
+    User u = null;
 
-    public UserManager(){
+    public UserManager() {
     }
 
-    public ArrayList<User> get(){
+    public ArrayList<User> get() {
         return this.users;
     }
 
-    public ArrayList<User> getByLogin(String login){
+    public ArrayList<User> getByLogin(String login) {
         ArrayList<User> selected = new ArrayList<>();
 
-        for(User u : users){
-            if(Objects.equals(u.getLogin(), login))
+        for (User u : users) {
+            if (Objects.equals(u.getLogin(), login))
                 selected.add(u);
         }
         return selected;
     }
 
-    public boolean post(User u){
-        if(this.validateUser(u)) {
+    public boolean post(User u) {
+        if (this.validateUser(u)) {
             this.users.add(u);
             return true;
-        }
-        else return false;
+        } else
+            return false;
 
     }
 
-    public boolean put(Long id, User u){
-        if(this.validateUser(u) && id > 0) {
+    public boolean put(Long id, User u) {
+        if (this.validateUser(u) && id > 0) {
             users.set(id.intValue(), u);
 
             return true;
-        }
-        else return false;
+        } else
+            return false;
 
     }
 
-    public User delete(Long id){
-        User u = null;
+    public User delete(Long id) {
 
-        if(id > 0){
+        if (id > 0) {
             u = users.get(id.intValue());
             users.remove(id);
-        }
-        else
+        } else
             throw new ArrayIndexOutOfBoundsException();
 
         return u;
     }
 
-    public boolean validateUser(User user){
+    public boolean validateUser(User user) {
         boolean response = true;
 
         response = this.loginValidate(user.getLogin()) &&
-                    this.passwordValidate(user.getPassword());
+                this.passwordValidate(user.getPassword());
 
         return response;
     }
 
-    private boolean loginValidate(String login){
+    public boolean takeBike(Long id, Bike bike) {
+        try {
+            u = users.get(id.intValue());
+            if (bike.getTaken()) {
+                return false;
+            }
+            u.setBike(bike);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean returnBike(Long id, Dock dock) {
+        try {
+            u = users.get(id.intValue());
+            if (u.getBike() == null || dock.addBike(u.getBike()) == false) {
+                return false;
+            }
+            u.setBike(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean loginValidate(String login) {
         // login string validate
         try {
             if (login.length() > 12 ||
@@ -95,7 +126,7 @@ public class UserManager {
         return true;
     }
 
-    private boolean passwordValidate(String password){
+    private boolean passwordValidate(String password) {
         // password string validate
         try {
             if (password.length() > 20 ||

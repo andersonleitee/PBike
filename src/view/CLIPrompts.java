@@ -42,5 +42,4 @@ public class CLIPrompts extends SuperPrompts {
             }
         }
     }
-
 }
