@@ -25,25 +25,25 @@ public class UserManager {
     public ArrayList<User> getByLogin(String login) {
         ArrayList<User> selected = new ArrayList<>();
 
-        for (User u : users) {
-            if (Objects.equals(u.getLogin(), login))
-                selected.add(u);
+        for (User user : users) {
+            if (Objects.equals(user.getLogin(), login))
+                selected.add(user);
         }
         return selected;
     }
 
-    public boolean post(User u) {
-        if (this.validateUser(u)) {
-            this.users.add(u);
+    public boolean post(User user) {
+        if (this.validateUser(user)) {
+            this.users.add(user);
             return true;
         } else
             return false;
 
     }
 
-    public boolean put(Long id, User u) {
-        if (this.validateUser(u) && id > 0) {
-            users.set(id.intValue(), u);
+    public boolean put(Long id, User user) {
+        if (this.validateUser(user) && id > 0) {
+            users.set(id.intValue(), user);
 
             return true;
         } else
@@ -108,19 +108,16 @@ public class UserManager {
                     login.length() == 0) {
                 throw new ExceptionLength(login.length());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        try {
             for (char c : login.toCharArray()) {
                 for (int i = 0; i <= MAX_NUM; i++) {
                     if (Integer.parseInt(String.valueOf(c)) == i)
                         throw new ExceptionNumber(i);
                 }
             }
-        } catch (NumberFormatException | ExceptionNumber e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
 
         return true;
@@ -133,11 +130,7 @@ public class UserManager {
                     password.length() < 8) {
                 throw new ExceptionLength(password.length());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        try {
             int numbersCount = 0;
             for (char c : password.toCharArray()) {
                 for (int i = 0; i <= MAX_NUM; i++) {
@@ -147,8 +140,9 @@ public class UserManager {
             }
             if (numbersCount < 2)
                 throw new ExceptionPassNumber(numbersCount);
-        } catch (NumberFormatException | ExceptionPassNumber e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
         return true;
     }

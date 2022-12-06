@@ -1,6 +1,8 @@
 package model.Bike;
 
-public class Bike {
+import structural.Factory.Entity;
+
+public class Bike implements Entity {
     private int id;
     private boolean taken = false;
 

@@ -1,0 +1,17 @@
+package model.Dock;
+
+import structural.Factory.Creator;
+import structural.Factory.Entity;
+
+public class DockCreator extends Creator {
+    private int id, capacity;
+    @Override
+    public Entity factoryMethod() {
+        return new Dock(id, capacity);
+    }
+
+    public void setIdAndCapacity(int id, int capacity){
+        this.id = id;
+        this.capacity = capacity;
+    }
+}

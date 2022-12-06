@@ -49,6 +49,7 @@ public class UserPrompts extends SuperPrompts {
             System.out.println("Type here the user password: ");
             password = scanner.nextLine();
 
+            userCreator.setLoginAndPassword(login, password);
             u = super.entityCreate(userCreator);
             if(!userManager.validateUser((User) u))
                 break;

@@ -2,12 +2,15 @@ package controller;
 
 import model.Dock.Dock;
 import model.Bike.Bike;
+import model.Dock.DockCreator;
+import structural.Factory.Entity;
 
 import java.util.ArrayList;
 
 public class DockManager {
     private ArrayList<Dock> docks = new ArrayList<Dock>();
     private int idGenerator = 0;
+    private DockCreator creator = new DockCreator();
 
     public DockManager(){}
 
@@ -29,8 +32,11 @@ public class DockManager {
     }
 
     public int newDock(int capacity) {
-        docks.add(new Dock(idGenerator, capacity));
+        Entity u = null;
         idGenerator++;
+
+        creator.setIdAndCapacity(idGenerator, capacity);
+        docks.add((Dock) creator.factoryMethod());
 
         return idGenerator - 1;
     }
