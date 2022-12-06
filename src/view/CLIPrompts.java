@@ -1,14 +1,29 @@
 package view;
 
+import controller.BikeManager;
+import controller.DockManager;
 import controller.UserManager;
 import model.User;
 
 import java.util.Scanner;
 
 public class CLIPrompts {
-    UserManager userManager = new UserManager();
+    private UserManager userManager = new UserManager();
+    private DockManager dockManager = new DockManager();
+    private BikeManager bikeManager = new BikeManager();
     Scanner scanner = new Scanner(System.in);
 
+    public UserManager getUserManager() {
+        return userManager;
+    }
+
+    public DockManager getDockManager() {
+        return dockManager;
+    }
+
+    public BikeManager getBikeManager() {
+        return bikeManager;
+    }
 
     private final String MENU = "What do you want to do now?\n" +
                                             "[ 1 ] - See the users list\n" +

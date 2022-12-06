@@ -3,6 +3,7 @@ package model;
 public class User {
     private String login;
     private String password;
+    private Bike bike = null;
 
     public User(){}
 
@@ -25,5 +26,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Bike getBike() {
+        return bike;
+    }
+
+    public void setBike(Bike bike) {
+        this.bike = bike;
     }
 }
