@@ -1,5 +1,7 @@
 package view;
 
+import controller.BikeManager;
+import controller.DockManager;
 import controller.UserManager;
 import model.User;
 

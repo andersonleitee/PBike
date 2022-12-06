@@ -1,9 +1,9 @@
 package infrastructure;
 
 public class ExceptionUnavailable extends Exception{
-        private int id;
+    private int id;
 
-    public ExceptionPassNumber(int id) {
+    public ExceptionUnavailable(int id) {
         this.id = id;
     }
 

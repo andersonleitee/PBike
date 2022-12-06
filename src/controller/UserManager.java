@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
     private final int[] NUMBERS = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    User u = null;
 
     public UserManager(){
     }
@@ -44,7 +45,6 @@ public class UserManager {
     }
 
     public User delete(Long id){
-        User u = null;
 
         if(id > 0){
             u = users.get(id.intValue());

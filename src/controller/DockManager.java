@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class DockManager {
     private ArrayList<Dock> docks = new ArrayList<Dock>();
-    int idGenerator = 0;
+    private int idGenerator = 0;
 
     public DockManager(){}
 
@@ -44,7 +44,7 @@ public class DockManager {
         }
     }
 
-    public boolean removeBike(int dockId, bikeId) {
+    public boolean removeBike(int dockId, int bikeId) {
         try {
             return docks.get(dockId).removeBike(bikeId);
         } catch (Exception e) {
