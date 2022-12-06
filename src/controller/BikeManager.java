@@ -2,12 +2,14 @@ package controller;
 
 import infrastructure.ExceptionUnavailable;
 import model.Bike.Bike;
+import model.Bike.BikeCreator;
 
 import java.util.ArrayList;
 
 public class BikeManager {
     private ArrayList<Bike> bikes = new ArrayList<Bike>();
     int idGenerator = 0;
+    private BikeCreator creator = new BikeCreator();
 
     public BikeManager(){}
 
@@ -29,8 +31,9 @@ public class BikeManager {
     }
 
     public int newBike() {
-        bikes.add(new Bike(idGenerator));
         idGenerator++;
+        creator.setId(idGenerator);
+        bikes.add((Bike) creator.factoryMethod());
 
         return idGenerator - 1;
     }

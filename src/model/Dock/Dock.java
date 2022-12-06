@@ -1,9 +1,10 @@
 package model.Dock;
 import model.Bike.Bike;
+import structural.Factory.Entity;
 
 import java.util.ArrayList;
 
-public class Dock {
+public class Dock implements Entity {
     private int id;
     private int capacity;
     private ArrayList<Bike> bikes = new ArrayList<Bike>();
