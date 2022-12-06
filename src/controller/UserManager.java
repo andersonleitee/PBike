@@ -3,72 +3,78 @@ package controller;
 import infrastructure.ExceptionLength;
 import infrastructure.ExceptionNumber;
 import infrastructure.ExceptionPassNumber;
-import model.User;
+import model.user.User;
 import model.Dock;
 import model.Bike;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
-    private final int[] NUMBERS = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    private final int MAX_NUM = 9;
     User u = null;
 
-    public UserManager(){
+    public UserManager() {
     }
 
-    public ArrayList<User> get(){
+    public ArrayList<User> get() {
         return this.users;
     }
 
-    public ArrayList<User> getByName(String name){
-        return this.users;
+    public ArrayList<User> getByLogin(String login) {
+        ArrayList<User> selected = new ArrayList<>();
+
+        for (User u : users) {
+            if (Objects.equals(u.getLogin(), login))
+                selected.add(u);
+        }
+        return selected;
     }
 
-    public boolean post(User u){
-        if(this.validateUser(u)) {
+    public boolean post(User u) {
+        if (this.validateUser(u)) {
             this.users.add(u);
             return true;
-        }
-        else return false;
+        } else
+            return false;
 
     }
 
-    public boolean put(Long id, User u){
-        if(this.validateUser(u) && id > 0) {
+    public boolean put(Long id, User u) {
+        if (this.validateUser(u) && id > 0) {
             users.set(id.intValue(), u);
 
             return true;
-        }
-        else return false;
+        } else
+            return false;
 
     }
 
-    public User delete(Long id){
+    public User delete(Long id) {
 
-        if(id > 0){
+        if (id > 0) {
             u = users.get(id.intValue());
             users.remove(id);
-        }
-        else
+        } else
             throw new ArrayIndexOutOfBoundsException();
 
         return u;
     }
 
-    public boolean validateUser(User user){
+    public boolean validateUser(User user) {
         boolean response = true;
 
         response = this.loginValidate(user.getLogin()) &&
-                    this.passwordValidate(user.getPassword());
+                this.passwordValidate(user.getPassword());
 
         return response;
     }
 
-    public boolean takeBike(Long id, Bike bike){
+    public boolean takeBike(Long id, Bike bike) {
         try {
             u = users.get(id.intValue());
-            if(bike.getTaken()) {
+            if (bike.getTaken()) {
                 return false;
             }
             u.setBike(bike);
@@ -80,10 +86,10 @@ public class UserManager {
         return true;
     }
 
-    public boolean returnBike(Long id, Dock dock){
+    public boolean returnBike(Long id, Dock dock) {
         try {
             u = users.get(id.intValue());
-            if(u.getBike() == null || dock.addBike(u.getBike()) == false) {
+            if (u.getBike() == null || dock.addBike(u.getBike()) == false) {
                 return false;
             }
             u.setBike(null);
@@ -95,11 +101,11 @@ public class UserManager {
         return true;
     }
 
-    private boolean loginValidate(String login){
+    private boolean loginValidate(String login) {
         // login string validate
         try {
             if (login.length() > 12 ||
-                    login.length() <= 0) {
+                    login.length() == 0) {
                 throw new ExceptionLength(login.length());
             }
         } catch (Exception e) {
@@ -108,9 +114,9 @@ public class UserManager {
 
         try {
             for (char c : login.toCharArray()) {
-                for (int n : NUMBERS) {
-                    if (Integer.parseInt(String.valueOf(c)) == n)
-                        throw new ExceptionNumber(n);
+                for (int i = 0; i <= MAX_NUM; i++) {
+                    if (Integer.parseInt(String.valueOf(c)) == i)
+                        throw new ExceptionNumber(i);
                 }
             }
         } catch (NumberFormatException | ExceptionNumber e) {
@@ -120,7 +126,7 @@ public class UserManager {
         return true;
     }
 
-    private boolean passwordValidate(String password){
+    private boolean passwordValidate(String password) {
         // password string validate
         try {
             if (password.length() > 20 ||
@@ -134,8 +140,8 @@ public class UserManager {
         try {
             int numbersCount = 0;
             for (char c : password.toCharArray()) {
-                for (int n : NUMBERS) {
-                    if (Integer.parseInt(String.valueOf(c)) == n)
+                for (int i = 0; i <= MAX_NUM; i++) {
+                    if (Integer.parseInt(String.valueOf(c)) == i)
                         numbersCount++;
                 }
             }
