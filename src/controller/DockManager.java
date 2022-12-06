@@ -1,7 +1,7 @@
 package controller;
 
-import model.Dock;
-import model.Bike;
+import model.Dock.Dock;
+import model.Bike.Bike;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package controller;
 
 import infrastructure.ExceptionUnavailable;
-import model.Bike;
+import model.Bike.Bike;
 
 import java.util.ArrayList;
 

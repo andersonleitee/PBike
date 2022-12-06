@@ -3,9 +3,9 @@ package controller;
 import infrastructure.ExceptionLength;
 import infrastructure.ExceptionNumber;
 import infrastructure.ExceptionPassNumber;
-import model.user.User;
-import model.Dock;
-import model.Bike;
+import model.User.User;
+import model.Dock.Dock;
+import model.Bike.Bike;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -89,7 +89,7 @@ public class UserManager {
     public boolean returnBike(Long id, Dock dock) {
         try {
             u = users.get(id.intValue());
-            if (u.getBike() == null || dock.addBike(u.getBike()) == false) {
+            if (u.getBike() == null || !dock.addBike(u.getBike())) {
                 return false;
             }
             u.setBike(null);

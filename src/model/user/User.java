@@ -1,7 +1,8 @@
-package model.user;
+package model.User;
 
 
-import factory.Entity;
+import model.Bike.Bike;
+import structural.Factory.Entity;
 
 public class User implements Entity {
     private String login;
