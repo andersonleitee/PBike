@@ -17,10 +17,13 @@ public class CLIPrompts extends SuperPrompts {
 
     public void start() {
         int choice = -1;
+        String input;
+
 
         while (true) {
             System.out.print(MENU);
-            choice = scanner.nextInt();
+            input = scanner.nextLine();
+            choice = Integer.parseInt(input);
 
             switch (choice) {
 
