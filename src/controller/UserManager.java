@@ -1,18 +1,17 @@
 package controller;
 
-import infrastructure.ExceptionLength;
-import infrastructure.ExceptionNumber;
-import infrastructure.ExceptionPassNumber;
 import model.User.User;
 import model.Dock.Dock;
 import model.Bike.Bike;
+import structural.Adapter.UserValidatorAdapter;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
-    private final int MAX_NUM = 9;
+    UserValidatorAdapter validator = new UserValidatorAdapter();
+
     User u = null;
 
     public UserManager() {
@@ -33,7 +32,7 @@ public class UserManager {
     }
 
     public boolean post(User user) {
-        if (this.validateUser(user)) {
+        if (validator.validateUser(user)) {
             this.users.add(user);
             return true;
         } else
@@ -42,7 +41,7 @@ public class UserManager {
     }
 
     public boolean put(Long id, User user) {
-        if (this.validateUser(user) && id > 0) {
+        if (validator.validateUser(user) && id > 0) {
             users.set(id.intValue(), user);
 
             return true;
@@ -62,14 +61,7 @@ public class UserManager {
         return u;
     }
 
-    public boolean validateUser(User user) {
-        boolean response = true;
 
-        response = this.loginValidate(user.getLogin()) &&
-                this.passwordValidate(user.getPassword());
-
-        return response;
-    }
 
     public boolean takeBike(Long id, Bike bike) {
         try {
@@ -101,49 +93,5 @@ public class UserManager {
         return true;
     }
 
-    private boolean loginValidate(String login) {
-        // login string validate
-        try {
-            if (login.length() > 12 ||
-                    login.length() == 0) {
-                throw new ExceptionLength(login.length());
-            }
 
-            for (char c : login.toCharArray()) {
-                for (int i = 0; i <= MAX_NUM; i++) {
-                    if (Integer.parseInt(String.valueOf(c)) == i)
-                        throw new ExceptionNumber(i);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean passwordValidate(String password) {
-        // password string validate
-        try {
-            if (password.length() > 20 ||
-                    password.length() < 8) {
-                throw new ExceptionLength(password.length());
-            }
-
-            int numbersCount = 0;
-            for (char c : password.toCharArray()) {
-                for (int i = 0; i <= MAX_NUM; i++) {
-                    if (Integer.parseInt(String.valueOf(c)) == i)
-                        numbersCount++;
-                }
-            }
-            if (numbersCount < 2)
-                throw new ExceptionPassNumber(numbersCount);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
 }

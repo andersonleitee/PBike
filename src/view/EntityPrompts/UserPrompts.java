@@ -5,11 +5,13 @@ import structural.Factory.Entity;
 import model.User.User;
 import model.User.UserCreator;
 import view.SuperPrompts;
+import structural.Adapter.UserValidatorAdapter;
 
 public class UserPrompts extends SuperPrompts {
 
     private UserManager userManager = new UserManager();
     private UserCreator userCreator = new UserCreator();
+    private UserValidatorAdapter validator = new UserValidatorAdapter();
     private Long id;
     private String login, password;
 
@@ -51,7 +53,7 @@ public class UserPrompts extends SuperPrompts {
 
             userCreator.setLoginAndPassword(login, password);
             u = super.entityCreate(userCreator);
-            if(!userManager.validateUser((User) u))
+            if(!validator.validateUser((User) u))
                 break;
             else
                 System.out.println(DATA_ERROR);
