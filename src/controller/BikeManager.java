@@ -20,13 +20,13 @@ public class BikeManager {
     public Bike getById(int id) {
         Bike bike = null;
 
-        if (id >= 0 && id < idGenerator)
-        {
+        try {
             bike = bikes.get(id);
         }
-        else
-            throw new ArrayIndexOutOfBoundsException();
-
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         return bike;        
     }
 
@@ -61,13 +61,13 @@ public class BikeManager {
     public Bike delete(int id) {
         Bike bike = null;
 
-        if (id >= 0 && id < idGenerator)
-        {
+        try {
             bike = bikes.get(id);
             bikes.remove(id);
         }
-        else
-            throw new ArrayIndexOutOfBoundsException();
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         
         return bike;
     }

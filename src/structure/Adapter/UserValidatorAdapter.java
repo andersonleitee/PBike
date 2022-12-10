@@ -1,4 +1,4 @@
-package structural.Adapter;
+package structure.Adapter;
 
 import infrastructure.ExceptionLength;
 import infrastructure.ExceptionNumber;

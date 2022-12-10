@@ -1,7 +1,7 @@
 package model.User;
 
-import structural.Factory.Creator;
-import structural.Factory.Entity;
+import structure.Factory.Creator;
+import structure.Factory.Entity;
 
 public class UserCreator extends Creator {
     private String login, password;

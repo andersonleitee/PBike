@@ -2,7 +2,7 @@ package model.User;
 
 
 import model.Bike.Bike;
-import structural.Factory.Entity;
+import structure.Factory.Entity;
 
 public class User implements Entity {
     private String login;

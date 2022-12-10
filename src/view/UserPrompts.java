@@ -1,11 +1,11 @@
 package view.EntityPrompts;
 
 import controller.UserManager;
-import structural.Factory.Entity;
+import structure.Factory.Entity;
 import model.User.User;
 import model.User.UserCreator;
 import view.SuperPrompts;
-import structural.Adapter.UserValidatorAdapter;
+import structure.Adapter.UserValidatorAdapter;
 
 public class UserPrompts extends SuperPrompts {
 

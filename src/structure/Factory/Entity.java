@@ -1,4 +1,4 @@
-package structural.Factory;
+package structure.Factory;
 
 public interface Entity {
 }

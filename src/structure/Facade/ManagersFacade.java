@@ -1,4 +1,4 @@
-package structural.Facade;
+package structure.Facade;
 
 import controller.BikeManager;
 import controller.DockManager;

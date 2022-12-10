@@ -3,7 +3,7 @@ package controller;
 import model.User.User;
 import model.Dock.Dock;
 import model.Bike.Bike;
-import structural.Adapter.UserValidatorAdapter;
+import structure.Adapter.UserValidatorAdapter;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -51,12 +51,14 @@ public class UserManager {
     }
 
     public User delete(Long id) {
+        User u = null;
 
-        if (id > 0) {
+        try {
             u = users.get(id.intValue());
             users.remove(id);
-        } else
-            throw new ArrayIndexOutOfBoundsException();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return u;
     }

@@ -1,6 +1,6 @@
 package model.Dock;
 import model.Bike.Bike;
-import structural.Factory.Entity;
+import structure.Factory.Entity;
 
 import java.util.ArrayList;
 

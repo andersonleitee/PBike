@@ -1,6 +1,6 @@
 package view;
 
-import view.EntityPrompts.UserPrompts;
+import view.UserPrompts;
 
 public class CLIPrompts extends SuperPrompts {
     protected final String MENU = "What do you want to do now?\n" +

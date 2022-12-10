@@ -3,7 +3,7 @@ package controller;
 import model.Dock.Dock;
 import model.Bike.Bike;
 import model.Dock.DockCreator;
-import structural.Factory.Entity;
+import structure.Factory.Entity;
 
 import java.util.ArrayList;
 
@@ -21,13 +21,12 @@ public class DockManager {
     public Dock getById(int id) {
         Dock dock = null;
 
-        if (id >= 0 && id < idGenerator)
-        {
+        try {
             dock = docks.get(id);
         }
-        else
-            throw new ArrayIndexOutOfBoundsException();
-
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         return dock;        
     }
 
@@ -62,14 +61,14 @@ public class DockManager {
     public Dock delete(int id) {
         Dock dock = null;
 
-        if (id >= 0 && id < idGenerator)
-        {
+        try {
             dock = docks.get(id);
             docks.remove(id);
         }
-        else
-            throw new ArrayIndexOutOfBoundsException();
-        
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return dock;
     }
 }

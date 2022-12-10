@@ -1,7 +1,7 @@
 package model.Dock;
 
-import structural.Factory.Creator;
-import structural.Factory.Entity;
+import structure.Factory.Creator;
+import structure.Factory.Entity;
 
 public class DockCreator extends Creator {
     private int id, capacity;

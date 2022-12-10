@@ -1,7 +1,7 @@
 package view;
 
-import structural.Factory.Creator;
-import structural.Factory.Entity;
+import structure.Factory.Creator;
+import structure.Factory.Entity;
 
 import java.util.Scanner;
 

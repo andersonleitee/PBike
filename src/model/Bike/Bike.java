@@ -1,6 +1,6 @@
 package model.Bike;
 
-import structural.Factory.Entity;
+import structure.Factory.Entity;
 
 public class Bike implements Entity {
     private int id;
