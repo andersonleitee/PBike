@@ -1,7 +1,6 @@
 package controller;
 
 import model.User.User;
-import model.Dock.Dock;
 import model.Bike.Bike;
 import structure.Adapter.UserValidatorAdapter;
 
@@ -10,6 +9,7 @@ import java.util.Objects;
 
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
+    private ArrayList<Bike> bikes = new ArrayList<bikes>();
     UserValidatorAdapter validator = new UserValidatorAdapter();
 
     User u = null;
@@ -34,6 +34,7 @@ public class UserManager {
     public boolean post(User user) {
         if (validator.validateUser(user)) {
             this.users.add(user);
+            bikes.add(null);
             return true;
         } else
             return false;
@@ -55,7 +56,8 @@ public class UserManager {
 
         try {
             u = users.get(id.intValue());
-            users.remove(id);
+            users.remove(id.intValue());
+            bikes.remove(id.intValue());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,15 +65,12 @@ public class UserManager {
         return u;
     }
 
-
-
     public boolean takeBike(Long id, Bike bike) {
         try {
-            u = users.get(id.intValue());
-            if (bike.getTaken()) {
+            if (bikes.get(id.intValue()) != null) {
                 return false;
             }
-            u.setBike(bike);
+            bikes.get(id.intValue()) = bike;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -80,13 +79,12 @@ public class UserManager {
         return true;
     }
 
-    public boolean returnBike(Long id, Dock dock) {
+    public boolean returnBike(Long id) {
         try {
-            u = users.get(id.intValue());
-            if (u.getBike() == null || !dock.addBike(u.getBike())) {
+            if (bikes.get(id.intValue()) == null) {
                 return false;
             }
-            u.setBike(null);
+            bikes.get(id.intValue()) = null;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -95,5 +93,15 @@ public class UserManager {
         return true;
     }
 
+    public Bike getBike(Long id) {
+        try {
+            return bikes.get(id.intValue());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
 }
