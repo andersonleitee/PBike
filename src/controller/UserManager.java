@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
-    private ArrayList<Bike> bikes = new ArrayList<bikes>();
+    private ArrayList<Bike> bikes = new ArrayList<Bike>();
     UserValidatorAdapter validator = new UserValidatorAdapter();
 
     User u = null;
@@ -70,7 +70,7 @@ public class UserManager {
             if (bikes.get(id.intValue()) != null) {
                 return false;
             }
-            bikes.get(id.intValue()) = bike;
+            bikes.set(id.intValue(), bike);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -84,7 +84,7 @@ public class UserManager {
             if (bikes.get(id.intValue()) == null) {
                 return false;
             }
-            bikes.get(id.intValue()) = null;
+            bikes.set(id.intValue(), null);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

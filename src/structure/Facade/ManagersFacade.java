@@ -36,7 +36,7 @@ public class ManagersFacade {
     public boolean returnBike(Long idUser, int idDock)
     {
         try {
-            bike = userManager.getBike(idUser);
+            Bike bike = userManager.getBike(idUser);
             if (dockManager.addBike(idDock, bike)) {
                 return userManager.returnBike(idUser);
             }
