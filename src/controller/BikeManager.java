@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class BikeManager {
     private ArrayList<Bike> bikes = new ArrayList<Bike>();
+    private ArrayList<boolean> taken = new ArrayList<boolean>;
     int idGenerator = 0;
     private BikeCreator creator = new BikeCreator();
 
@@ -34,13 +35,14 @@ public class BikeManager {
         idGenerator++;
         creator.setId(idGenerator);
         bikes.add((Bike) creator.factoryMethod());
+        taken.add(false);
 
         return idGenerator - 1;
     }
 
     public Bike takeBike(int id) {
         if(validateBikeAvailability(id, true)) {
-            bikes.get(id).setTaken(true);
+            taken.get(id) = true;
             
             return bikes.get(id);
         }
@@ -50,7 +52,7 @@ public class BikeManager {
 
     public boolean returnBike(int id) {
         if(validateBikeAvailability(id, false)) {
-            bikes.get(id).setTaken(false);
+            taken.get(id) = false;
             
             return true;
         }
@@ -58,24 +60,24 @@ public class BikeManager {
         return false;
     }
 
-    public Bike delete(int id) {
-        Bike bike = null;
+    // public Bike delete(int id) {
+    //     Bike bike = null;
 
-        try {
-            bike = bikes.get(id);
-            bikes.remove(id);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+    //     try {
+    //         bike = bikes.get(id);
+    //         bikes.remove(id);
+    //         taken.remove(id);
+    //     }
+    //     catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
         
-        return bike;
-    }
+    //     return bike;
+    // }
 
     private boolean validateBikeAvailability(int id, boolean availability) {
         try {
-            Bike bike = bikes.get(id); // can throw ArrayIndexOutOfBoundsException
-            if (bike.getTaken() == availability) {
+            if (taken.get(id) == availability) {
                 throw new ExceptionUnavailable(id);
             }
         } catch (Exception e) {

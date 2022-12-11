@@ -1,4 +1,4 @@
-package view.EntityPrompts;
+package view;
 
 import controller.UserManager;
 import structure.Factory.Entity;
