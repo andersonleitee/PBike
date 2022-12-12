@@ -5,12 +5,11 @@ import structure.Factory.Entity;
 import model.User.User;
 import model.User.UserCreator;
 import structure.Adapter.UserValidatorAdapter;
+import structure.Singleton.SingletonUserManager;
 
 import java.util.Objects;
 
 public class UserPrompts extends SuperPrompts {
-
-    private UserManager userManager = new UserManager();
     private UserCreator userCreator = new UserCreator();
     private UserValidatorAdapter validator = new UserValidatorAdapter();
     private Long id;
@@ -26,8 +25,8 @@ public class UserPrompts extends SuperPrompts {
         String password = scanner.nextLine();
 
         boolean ok = false;
-        if(userManager.getByLogin(login) != null){
-            if(Objects.equals(userManager.getByLogin(login).getPassword(), login)){
+        if(SingletonUserManager.getInstance().getByLogin(login) != null){
+            if(Objects.equals(SingletonUserManager.getInstance().getByLogin(login).getPassword(), login)){
                 ok = true;
             }
         }
@@ -35,25 +34,25 @@ public class UserPrompts extends SuperPrompts {
     }
 
     public void showAllUsers(){
-        System.out.println(userManager.get());
+        System.out.println(SingletonUserManager.getInstance().get());
     }
 
     public boolean addNewUser(){
-        return userManager.post(createUser());
+        return SingletonUserManager.getInstance().post(createUser());
     }
 
     public boolean updateUser(){
         System.out.println("Type here the user id to be updated");
         id = scanner.nextLong();
 
-        return userManager.put(id, createUser());
+        return SingletonUserManager.getInstance().put(id, createUser());
     }
 
     public void deleteUser(){
         System.out.println("Type here the user id to be deleted");
         id = scanner.nextLong();
 
-        Entity u = userManager.delete(id);
+        Entity u = SingletonUserManager.getInstance().delete(id);
         System.out.println("Deleted User: " + u + "\n\n");
     }
 
