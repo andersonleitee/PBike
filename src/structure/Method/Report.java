@@ -1,9 +1,12 @@
 package structure.Method;
 
-public interface Relatorio {
-    public void gerarCabecalho();
-    public void gerarCorpo();
-    public void gerarRodape();
-    public void imprimir();
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+
+public interface Report {
+    public void  gerarCabecalho() throws DocumentException;
+//    public void gerarCorpo();
+//    public  void gerarRodape();
+//    public void imprimir();
 
 }
