@@ -26,11 +26,9 @@ public class UserPrompts extends SuperPrompts {
         String password = scanner.nextLine();
 
         boolean ok = false;
-        for(User u : userManager.get()){
-            if (Objects.equals(u.getLogin(), login) &&
-                    Objects.equals(u.getPassword(), password)) {
+        if(userManager.getByLogin(login) != null){
+            if(Objects.equals(userManager.getByLogin(login).getPassword(), login)){
                 ok = true;
-                break;
             }
         }
         return ok;
