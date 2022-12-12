@@ -4,9 +4,8 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 
 public interface Report {
-    public void  gerarCabecalho() throws DocumentException;
-//    public void gerarCorpo();
-//    public  void gerarRodape();
-//    public void imprimir();
+    void  header() throws DocumentException;
+   void body() throws DocumentException;
+   void print();
 
 }
