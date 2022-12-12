@@ -10,6 +10,7 @@ import java.util.Objects;
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
     private ArrayList<Bike> bikes = new ArrayList<Bike>();
+    public ArrayList<UserManager> logged = new ArrayList<>();
     UserValidatorAdapter validator = new UserValidatorAdapter();
 
     User u = null;
@@ -23,6 +24,7 @@ public class UserManager {
     public User getByLogin(String login) {
         for (User user : users) {
             if (Objects.equals(user.getLogin(), login))
+              //  logged(user);
                 return user;
         }
         return null;

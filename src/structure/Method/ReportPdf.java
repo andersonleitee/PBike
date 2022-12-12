@@ -3,7 +3,6 @@ package structure.Method;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import controller.UserManager;
-import model.User.User;
 
 
 import java.io.FileNotFoundException;
@@ -15,7 +14,7 @@ import java.util.List;
 public class ReportPdf implements Report {
 
     private final Document documentPDF;
-    private UserManager userManager;
+    private UserManager userManager = new UserManager();
     public ReportPdf(UserManager userManager){
 
        documentPDF = new Document();
@@ -44,7 +43,7 @@ public class ReportPdf implements Report {
     public void body() throws DocumentException {
 
         List list = new ArrayList<>();
-        for (User u : userManager.logged){
+        for (Object u : userManager.logged){
             list.add(u);
         }
         Paragraph middle = new Paragraph();
