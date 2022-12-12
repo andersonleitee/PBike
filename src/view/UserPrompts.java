@@ -5,6 +5,7 @@ import structure.Factory.Entity;
 import model.User.User;
 import model.User.UserCreator;
 import structure.Adapter.UserValidatorAdapter;
+import structure.Singleton.SingletonPBSystem;
 import structure.Singleton.SingletonUserManager;
 
 import java.util.Objects;
@@ -28,10 +29,20 @@ public class UserPrompts extends SuperPrompts {
         if(SingletonUserManager.getInstance().getByLogin(login) != null){
             if(Objects.equals(SingletonUserManager.getInstance().getByLogin(login).getPassword(), password)){
                 ok = true;
+                SingletonPBSystem.getInstance().addLoggedUser(new User(login, password));
             }
         }
         return ok;
     }
+
+    public void testUserLogin(String login, String password){
+        if(SingletonUserManager.getInstance().getByLogin(login) != null){
+            if(Objects.equals(SingletonUserManager.getInstance().getByLogin(login).getPassword(), password)){
+                SingletonPBSystem.getInstance().addLoggedUser(new User(login, password));
+            }
+        }
+    }
+
 
     public void showAllUsers(){
         System.out.println(SingletonUserManager.getInstance().get());
