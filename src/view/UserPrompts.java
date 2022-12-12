@@ -1,11 +1,12 @@
-package view.EntityPrompts;
+package view;
 
 import controller.UserManager;
 import structure.Factory.Entity;
 import model.User.User;
 import model.User.UserCreator;
-import view.SuperPrompts;
 import structure.Adapter.UserValidatorAdapter;
+
+import java.util.Objects;
 
 public class UserPrompts extends SuperPrompts {
 
@@ -16,6 +17,24 @@ public class UserPrompts extends SuperPrompts {
     private String login, password;
 
     public UserPrompts(){}
+
+    public boolean userLogin(){
+        System.out.println("Type here your user login: ");
+        String login = scanner.nextLine();
+
+        System.out.println("Type here your user password");
+        String password = scanner.nextLine();
+
+        boolean ok = false;
+        for(User u : userManager.get()){
+            if (Objects.equals(u.getLogin(), login) &&
+                    Objects.equals(u.getPassword(), password)) {
+                ok = true;
+                break;
+            }
+        }
+        return ok;
+    }
 
     public void showAllUsers(){
         System.out.println(userManager.get());
