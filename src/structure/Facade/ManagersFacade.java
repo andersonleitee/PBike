@@ -21,10 +21,9 @@ public class ManagersFacade {
     public boolean takeBike(Long idUser, int idDock)
     {
         try {
-            Dock dock = dockManager.getById(idDock); // can throw ArrayIndexOutOfBoundsException
-            if (dock.getBikesSize() > 0)
+            Bike bike = dockManager.removeBike(idDock);
+            if (bike != null)
             {
-                Bike bike = dock.getBikes().get(0);
                 return userManager.takeBike(idUser, bike);
             }
         } catch (Exception e) {
@@ -37,8 +36,10 @@ public class ManagersFacade {
     public boolean returnBike(Long idUser, int idDock)
     {
         try {
-            Dock dock = dockManager.getById(idDock); // can throw ArrayIndexOutOfBoundsException
-            return userManager.returnBike(idUser, dock);
+            Bike bike = userManager.getBike(idUser);
+            if (dockManager.addBike(idDock, bike)) {
+                return userManager.returnBike(idUser);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
