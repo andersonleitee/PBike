@@ -1,6 +1,5 @@
 package view;
 
-import view.UserPrompts;
 
 public class CLIPrompts extends SuperPrompts {
     private final String MAIN_MENU = "Welcome, what do you want do? \n\n" +
