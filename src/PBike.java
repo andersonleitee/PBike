@@ -1,8 +1,4 @@
-
 import view.CLIPrompts;
-
-
-
 
 public class PBike {
     public static void main(String[] args) {

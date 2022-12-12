@@ -50,7 +50,7 @@ public class DockManager {
                 bikesPerDock.get(dockId).add(bike);
             }
             else {
-                throw new ExceptionFull(id);
+                throw new ExceptionFull(dockId);
             }
 
             return true;
@@ -66,7 +66,7 @@ public class DockManager {
                 return bikesPerDock.get(dockId).remove(0);
             }
             else {
-                throw new ExceptionEmpty(id);
+                throw new ExceptionEmpty(dockId);
             }
         } catch (Exception e) {
             e.printStackTrace();

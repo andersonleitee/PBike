@@ -1,4 +1,4 @@
-package Memento;
+package structure.Memento;
 
 public class Memento {
     private Object state;

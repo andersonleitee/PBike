@@ -3,10 +3,10 @@ package structure.Memento;
 import java.util.Stack;
 
 public class CareTaker {
-    private Stack<Memento.Memento> historic = new Stack<>();
-    public Memento.Originator originator;
+    private Stack<Memento> historic = new Stack<>();
+    public Originator originator;
 
-    public CareTaker(Memento.Originator o){
+    public CareTaker(Originator o){
         this.originator = o;
     }
 

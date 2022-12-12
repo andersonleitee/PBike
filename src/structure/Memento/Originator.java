@@ -1,14 +1,14 @@
-package Memento;
+package structure.Memento;
 
 public abstract class Originator {
     protected Object state = null;
 
-    public void setMemento(Memento.Memento memento){
+    public void setMemento(Memento memento){
         this.state = memento.getState();
     }
 
-    public Memento.Memento createMemento(){
-        return new Memento.Memento(state);
+    public Memento createMemento(){
+        return new Memento(state);
     }
 
 }
