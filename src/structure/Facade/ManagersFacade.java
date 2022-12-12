@@ -5,6 +5,9 @@ import controller.DockManager;
 import controller.UserManager;
 import model.Bike.Bike;
 import model.Dock.Dock;
+import structure.Singleton.SingletonDockManager;
+import structure.Singleton.SingletonUserManager;
+
 public class ManagersFacade {
     // Singleton
     private ManagersFacade(){};
@@ -14,17 +17,13 @@ public class ManagersFacade {
     }
 
     // TODO: get from CLIPrompts?
-    private UserManager userManager;
-    private DockManager dockManager;
-    private BikeManager bikeManager;
-
     public boolean takeBike(Long idUser, int idDock)
     {
         try {
-            Bike bike = dockManager.removeBike(idDock);
+            Bike bike = SingletonDockManager.getInstance().removeBike(idDock);
             if (bike != null)
             {
-                return userManager.takeBike(idUser, bike);
+                return SingletonUserManager.getInstance().takeBike(idUser, bike);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,9 +35,9 @@ public class ManagersFacade {
     public boolean returnBike(Long idUser, int idDock)
     {
         try {
-            Bike bike = userManager.getBike(idUser);
-            if (dockManager.addBike(idDock, bike)) {
-                return userManager.returnBike(idUser);
+            Bike bike = SingletonUserManager.getInstance().getBike(idUser);
+            if (SingletonDockManager.getInstance().addBike(idDock, bike)) {
+                return SingletonUserManager.getInstance().returnBike(idUser);
             }
         } catch (Exception e) {
             e.printStackTrace();
