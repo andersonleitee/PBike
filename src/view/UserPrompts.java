@@ -26,7 +26,7 @@ public class UserPrompts extends SuperPrompts {
 
         boolean ok = false;
         if(SingletonUserManager.getInstance().getByLogin(login) != null){
-            if(Objects.equals(SingletonUserManager.getInstance().getByLogin(login).getPassword(), login)){
+            if(Objects.equals(SingletonUserManager.getInstance().getByLogin(login).getPassword(), password)){
                 ok = true;
             }
         }
