@@ -1,21 +1,12 @@
 package structure.Memento;
 
-import java.util.Stack;
+public abstract class CareTaker {
+    
+    private Memento historic = null;
+    private Editor editor;
 
-public class CareTaker {
-    private Stack<Memento> historic = new Stack<>();
-    public Originator originator;
+    public abstract void saveState(){}
 
-    public CareTaker(Originator o){
-        this.originator = o;
-    }
-
-    public void saveState(){
-        historic.push(originator.createMemento());
-    }
-
-    public void undo(){
-        originator.setMemento(historic.pop());
-    }
+    public abstract void undo(){}
 
 }
