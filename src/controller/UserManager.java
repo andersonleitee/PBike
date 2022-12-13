@@ -77,6 +77,8 @@ public class UserManager {
         return u;
     }
 
+    // bikes
+
     public boolean takeBike(Long id, Bike bike) {
         try {
             if (bikes.get(id.intValue()) != null) {
@@ -115,6 +117,8 @@ public class UserManager {
 
         return null;
     }
+
+    // favorite docks
 
     public void addFavoriteDock(Long userId, int dockId) {
         uFavEditors.get(userId.intValue()).addFavorite(dockId);
