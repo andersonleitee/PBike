@@ -12,11 +12,6 @@ public class UserFavoritesMemento extends Memento {
         this.favoriteDocks = favoriteDocks;
     }
 
-    @Override
-    public void setState() {
-
-    }
-
     public void restore() {
         editor.setFavorites(favoriteDocks);
     }

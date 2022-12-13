@@ -28,9 +28,4 @@ public class UserFavoritesEditor extends Editor {
         return new UserFavoritesMemento(this, favoriteDocks);
     }
 
-    @Override
-    public void setFavorites(Memento historic) {
-
-    }
-
 }
