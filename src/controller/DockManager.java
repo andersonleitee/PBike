@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DockManager {
-    private Map<int, Dock> docks = new HashMap<int, Dock>();
-    private Map<int, ArrayList<Bike>> bikesPerDock = new HashMap<int, ArrayList<Bike>>();
+    private Map<Integer, Dock> docks = new HashMap<Integer, Dock>();
+    private Map<Integer, ArrayList<Bike>> bikesPerDock = new HashMap<Integer, ArrayList<Bike>>();
     private int idGenerator = 0;
     private DockCreator creator = new DockCreator();
 

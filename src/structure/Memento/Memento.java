@@ -1,8 +1,6 @@
 package structure.Memento;
 
-public abstract class Editor {
-    
-    public abstract void setState();
+public abstract class Memento {
 
     public abstract void restore();
     

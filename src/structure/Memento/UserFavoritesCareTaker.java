@@ -13,7 +13,7 @@ public class UserFavoritesCareTaker extends CareTaker {
     }
 
     public void undo(){
-        editor.setFavorites(historic);
+        historic.restore();
     }
 
 }

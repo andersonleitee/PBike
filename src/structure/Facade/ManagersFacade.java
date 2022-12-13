@@ -5,6 +5,7 @@ import controller.DockManager;
 import controller.UserManager;
 import model.Bike.Bike;
 import model.Dock.Dock;
+import structure.Singleton.SingletonBikeManager;
 import structure.Singleton.SingletonDockManager;
 import structure.Singleton.SingletonUserManager;
 
@@ -17,9 +18,9 @@ public class ManagersFacade {
     }
 
     // TODO: get instance from singleton manager
-    private UserManager userManager;
-    private DockManager dockManager;
-    private BikeManager bikeManager;
+    private final UserManager userManager = SingletonUserManager.getInstance();
+    private final DockManager dockManager = SingletonDockManager.getInstance();
+    private final BikeManager bikeManager = SingletonBikeManager.getInstance();
 
     public boolean takeBike(Long idUser, int idDock)
     {

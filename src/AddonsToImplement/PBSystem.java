@@ -15,7 +15,15 @@ public class PBSystem {
         logged_users.add(u);
     }
 
-    public ArrayList<User> getLoggedUsers(){
-        return this.logged_users;
+    public String getLoggedUsers(){
+        StringBuilder out = new StringBuilder();
+
+        for(User u : this.logged_users){
+            String userS = u.getLogin() + "\n";
+
+            out.append(userS);
+        }
+
+        return out.toString();
     }
 }
