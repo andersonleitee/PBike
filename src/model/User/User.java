@@ -28,4 +28,12 @@ public class User implements Entity {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return
+                "login='" + login + '\'' + "\n" +
+                ", password='" + password + '\'' + "\n"
+                ;
+    }
 }
