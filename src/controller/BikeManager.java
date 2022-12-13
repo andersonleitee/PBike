@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BikeManager {
-    private Map<int, Bike> bikes = new HashMap<int, Bike>();
-    private Map<int, boolean> taken = new HashMap<int, boolean>;
+    private Map<Integer, Bike> bikes = new HashMap<Integer, Bike>();
+    private Map<Integer, Boolean> taken = new HashMap<Integer, Boolean>();
     int idGenerator = 0;
     private BikeCreator creator = new BikeCreator();
 
@@ -35,7 +35,7 @@ public class BikeManager {
 
     public Bike takeBike(int id) {
         if(validateBikeAvailability(id, true)) {
-            taken.add(id, true);
+            taken.put(id, true);
             
             return bikes.get(id);
         }
@@ -45,7 +45,7 @@ public class BikeManager {
 
     public boolean returnBike(int id) {
         if(validateBikeAvailability(id, false)) {
-            taken.add(id, false);
+            taken.put(id, false);
             
             return true;
         }
