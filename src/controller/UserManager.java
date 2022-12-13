@@ -2,15 +2,25 @@ package controller;
 
 import model.User.User;
 import model.Bike.Bike;
+import model.Dock.Dock;
+
 import structure.Adapter.UserValidatorAdapter;
+import structure.Memento.UserFavoritesEditor;
+import structure.Memento.UserFavoritesCareTaker;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
-    private ArrayList<Bike> bikes = new ArrayList<Bike>();
-    UserValidatorAdapter validator = new UserValidatorAdapter();
+    private Map<int, Bike> bikes = new HashMap<int, Bike>();
+    private UserValidatorAdapter validator = new UserValidatorAdapter();
+    private Map<int, UserFavoritesEditor> uFavEditors = new HashMap<int, UserFavoritesEditor>();
+    private Map<int, UserFavoritesCareTaker> uFavCareTaker = new HashMap<int, UserFavoritesCareTaker>();
+    // TODO: get instance from singleton manager
+    private DockManager dockManager;
 
     User u = null;
 
@@ -44,6 +54,8 @@ public class UserManager {
     public boolean put(Long id, User user) {
         if (validator.validateUser(user) && id > 0) {
             users.set(id.intValue(), user);
+            uFavEditors.put(id.intValue(), new UserFavoritesEditor());
+            uFavCareTaker.put(id.intValue(), new UserFavoritesCareTaker(uFavEditors.get(id.intValue())));
 
             return true;
         } else
@@ -70,7 +82,7 @@ public class UserManager {
             if (bikes.get(id.intValue()) != null) {
                 return false;
             }
-            bikes.set(id.intValue(), bike);
+            bikes.put(id.intValue(), bike);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -84,7 +96,7 @@ public class UserManager {
             if (bikes.get(id.intValue()) == null) {
                 return false;
             }
-            bikes.set(id.intValue(), null);
+            bikes.put(id.intValue(), null);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -102,6 +114,34 @@ public class UserManager {
         }
 
         return null;
+    }
+
+    public void addFavoriteDock(Long userId, int dockId) {
+        uFavEditors.get(userId.intValue()).addFavorite(dockId);
+    }
+
+    public void removeFavoriteDock(Long userId, int dockId) {
+        uFavEditors.get(userId.intValue()).removeFavorite(dockId);
+    }
+
+    public void saveFavoriteDocks(Long usedId) {
+        uFavCareTaker.get(userId).saveState();
+    }
+
+    public void restoreLastSavedFavoriteDocks(Long usedId) {
+        uFavCareTaker.get(usedId).undo();
+    }
+
+    public ArrayList<Dock> getFavoriteDocks(Long userId) {
+        ArrayList<int> favoriteDocksIds = new ArrayList<int>(
+            uFavEditors.get(userId.intValue()).getFavorites());
+        ArrayList<Dock> favoriteDocks = new ArrayList<Dock>();
+
+        for(int i = 0; i < favoriteDocksIds.size(); i++) {
+            favoriteDocks.add(dockManager.getById(favoriteDocksIds[i]));
+        }
+
+        return favoriteDocks;        
     }
 
 }

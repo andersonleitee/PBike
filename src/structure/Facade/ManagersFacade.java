@@ -13,7 +13,7 @@ public class ManagersFacade {
         return instance;
     }
 
-    // TODO: get from CLIPrompts?
+    // TODO: get instance from singleton manager
     private UserManager userManager;
     private DockManager dockManager;
     private BikeManager bikeManager;
