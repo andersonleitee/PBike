@@ -35,7 +35,7 @@ public class BikeManager {
 
     public Bike takeBike(int id) {
         if(validateBikeAvailability(id, true)) {
-            taken.get(id) = true;
+            taken.add(id, true);
             
             return bikes.get(id);
         }
@@ -45,7 +45,7 @@ public class BikeManager {
 
     public boolean returnBike(int id) {
         if(validateBikeAvailability(id, false)) {
-            taken.get(id) = false;
+            taken.add(id, false);
             
             return true;
         }

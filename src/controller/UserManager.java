@@ -26,19 +26,16 @@ public class UserManager {
 
     public UserManager() {
     }
-
     public ArrayList<User> get() {
         return this.users;
     }
 
-    public ArrayList<User> getByLogin(String login) {
-        ArrayList<User> selected = new ArrayList<>();
-
+    public User getByLogin(String login) {
         for (User user : users) {
             if (Objects.equals(user.getLogin(), login))
-                selected.add(user);
+                return user;
         }
-        return selected;
+        return null;
     }
 
     public boolean post(User user) {
