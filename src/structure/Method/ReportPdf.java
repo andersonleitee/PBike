@@ -1,21 +1,23 @@
 package structure.Method;
 
+import AddonsToImplement.PBSystem;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import controller.UserManager;
+import structure.Singleton.SingletonPBSystem;
+import view.UserPrompts;
 
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class ReportPdf implements Report {
 
     private final Document documentPDF;
-    private UserManager userManager = new UserManager();
-    public ReportPdf(UserManager userManager){
+   private PBSystem pbSystem = new PBSystem();
+    //private UserManager userManager = new UserManager();
+    public ReportPdf(){
 
        documentPDF = new Document();
         try {
@@ -41,13 +43,9 @@ public class ReportPdf implements Report {
 
     @Override
     public void body() throws DocumentException {
-
-        List list = new ArrayList<>();
-        for (Object u : userManager.logged){
-            list.add(u);
-        }
         Paragraph middle = new Paragraph();
         middle.setAlignment(Element.BODY);
+        middle.add(new Chunk(String.valueOf(SingletonPBSystem.getInstance().getLoggedUsers().toString())));
         documentPDF.add(middle);
 
     }
