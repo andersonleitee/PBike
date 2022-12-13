@@ -5,12 +5,12 @@ import structure.Factory.Entity;
 import model.User.User;
 import model.User.UserCreator;
 import structure.Adapter.UserValidatorAdapter;
+import structure.Singleton.SingletonPBSystem;
+import structure.Singleton.SingletonUserManager;
 
 import java.util.Objects;
 
 public class UserPrompts extends SuperPrompts {
-
-    private UserManager userManager = new UserManager();
     private UserCreator userCreator = new UserCreator();
     private UserValidatorAdapter validator = new UserValidatorAdapter();
     private Long id;
@@ -26,36 +26,44 @@ public class UserPrompts extends SuperPrompts {
         String password = scanner.nextLine();
 
         boolean ok = false;
-        for(User u : userManager.get()){
-            if (Objects.equals(u.getLogin(), login) &&
-                    Objects.equals(u.getPassword(), password)) {
+        if(SingletonUserManager.getInstance().getByLogin(login) != null){
+            if(Objects.equals(SingletonUserManager.getInstance().getByLogin(login).getPassword(), password)){
                 ok = true;
-                break;
+                SingletonPBSystem.getInstance().addLoggedUser(new User(login, password));
             }
         }
         return ok;
     }
 
+    public void testUserLogin(String login, String password){
+        if(SingletonUserManager.getInstance().getByLogin(login) != null){
+            if(Objects.equals(SingletonUserManager.getInstance().getByLogin(login).getPassword(), password)){
+                SingletonPBSystem.getInstance().addLoggedUser(new User(login, password));
+            }
+        }
+    }
+
+
     public void showAllUsers(){
-        System.out.println(userManager.get());
+        System.out.println(SingletonUserManager.getInstance().get());
     }
 
     public boolean addNewUser(){
-        return userManager.post(createUser());
+        return SingletonUserManager.getInstance().post(createUser());
     }
 
     public boolean updateUser(){
         System.out.println("Type here the user id to be updated");
         id = scanner.nextLong();
 
-        return userManager.put(id, createUser());
+        return SingletonUserManager.getInstance().put(id, createUser());
     }
 
     public void deleteUser(){
         System.out.println("Type here the user id to be deleted");
         id = scanner.nextLong();
 
-        Entity u = userManager.delete(id);
+        Entity u = SingletonUserManager.getInstance().delete(id);
         System.out.println("Deleted User: " + u + "\n\n");
     }
 

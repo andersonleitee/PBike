@@ -29,10 +29,9 @@ public class UserValidatorAdapter implements UserValidatorProtocol{
             }
 
             for (char c : login.toCharArray()) {
-                for (int i = 0; i <= MAX_NUM; i++) {
-                    if (Integer.parseInt(String.valueOf(c)) == i)
-                        throw new ExceptionNumber(i);
-                }
+                if (Character.isDigit(c))
+                    throw new ExceptionNumber(Integer.parseInt(String.valueOf(c)));
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,10 +52,8 @@ public class UserValidatorAdapter implements UserValidatorProtocol{
 
             int numbersCount = 0;
             for (char c : password.toCharArray()) {
-                for (int i = 0; i <= MAX_NUM; i++) {
-                    if (Integer.parseInt(String.valueOf(c)) == i)
-                        numbersCount++;
-                }
+                if (Character.isDigit(c))
+                    numbersCount++;
             }
             if (numbersCount < 2)
                 throw new ExceptionPassNumber(numbersCount);
