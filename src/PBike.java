@@ -21,7 +21,8 @@ public class PBike {
             userPrompts.testUserLogin(names[i], passwords[i]);
         }
 
-        System.out.println(SingletonPBSystem.getInstance().getLoggedUsers());
+        String out = SingletonPBSystem.getInstance().getLoggedUsers();
+        System.out.println(out);
     }
 }
 

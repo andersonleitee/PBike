@@ -21,7 +21,7 @@ public class PBSystem {
         for(User u : this.logged_users){
             String userS = u.getLogin() + "\n";
 
-            out.append(u.getLogin()).append("\n");
+            out.append(userS);
         }
 
         return out.toString();
