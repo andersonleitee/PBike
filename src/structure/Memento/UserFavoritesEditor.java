@@ -1,13 +1,12 @@
 package structure.Memento;
 
-import controller.DockManager;
 import java.util.HashSet;
 import java.util.Set;
 
 public class UserFavoritesEditor extends Editor {
-    private Set<int> favoriteDocks = new HashSet<int>();
+    private Set<Integer> favoriteDocks = new HashSet<Integer>();
 
-    UserFavoritesEditor(){}
+    public UserFavoritesEditor(){}
     
     public void addFavorite(int id) {
         favoriteDocks.add(id);
@@ -17,16 +16,21 @@ public class UserFavoritesEditor extends Editor {
         favoriteDocks.remove(id);
     }
 
-    public boolean getFavorites() {
+    public Set<Integer> getFavorites() {
         return favoriteDocks;
     }
 
-    public void setFavorites(Set<int> favoriteDocks) {
+    public void setFavorites(Set<Integer> favoriteDocks) {
         this.favoriteDocks = favoriteDocks;
     }
 
     public UserFavoritesMemento createMemento(){
         return new UserFavoritesMemento(this, favoriteDocks);
+    }
+
+    @Override
+    public void setFavorites(Memento historic) {
+
     }
 
 }

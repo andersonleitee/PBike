@@ -7,6 +7,7 @@ import model.Dock.Dock;
 import structure.Adapter.UserValidatorAdapter;
 import structure.Memento.UserFavoritesEditor;
 import structure.Memento.UserFavoritesCareTaker;
+import structure.Singleton.SingletonDockManager;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -15,12 +16,11 @@ import java.util.Map;
 
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
-    private Map<int, Bike> bikes = new HashMap<int, Bike>();
+    private Map<Integer, Bike> bikes = new HashMap<Integer, Bike>();
     private UserValidatorAdapter validator = new UserValidatorAdapter();
-    private Map<int, UserFavoritesEditor> uFavEditors = new HashMap<int, UserFavoritesEditor>();
-    private Map<int, UserFavoritesCareTaker> uFavCareTaker = new HashMap<int, UserFavoritesCareTaker>();
-    // TODO: get instance from singleton manager
-    private DockManager dockManager;
+    private Map<Integer, UserFavoritesEditor> uFavEditors = new HashMap<Integer, UserFavoritesEditor>();
+    private Map<Integer, UserFavoritesCareTaker> uFavCareTaker = new HashMap<Integer, UserFavoritesCareTaker>();
+    private final DockManager dockManager = SingletonDockManager.getInstance();
 
     User u = null;
 
@@ -41,7 +41,6 @@ public class UserManager {
     public boolean post(User user) {
         if (validator.validateUser(user)) {
             this.users.add(user);
-            bikes.add(null);
             return true;
         } else
             return false;
@@ -125,7 +124,7 @@ public class UserManager {
         uFavEditors.get(userId.intValue()).removeFavorite(dockId);
     }
 
-    public void saveFavoriteDocks(Long usedId) {
+    public void saveFavoriteDocks(Long userId) {
         uFavCareTaker.get(userId).saveState();
     }
 
@@ -134,12 +133,12 @@ public class UserManager {
     }
 
     public ArrayList<Dock> getFavoriteDocks(Long userId) {
-        ArrayList<int> favoriteDocksIds = new ArrayList<int>(
+        ArrayList<Integer> favoriteDocksIds = new ArrayList<Integer>(
             uFavEditors.get(userId.intValue()).getFavorites());
         ArrayList<Dock> favoriteDocks = new ArrayList<Dock>();
 
         for(int i = 0; i < favoriteDocksIds.size(); i++) {
-            favoriteDocks.add(dockManager.getById(favoriteDocksIds[i]));
+            favoriteDocks.add(dockManager.getById(favoriteDocksIds.get(i)));
         }
 
         return favoriteDocks;        
