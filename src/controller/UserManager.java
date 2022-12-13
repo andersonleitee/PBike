@@ -10,25 +10,24 @@ import java.util.Objects;
 public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
     private ArrayList<Bike> bikes = new ArrayList<Bike>();
+    public ArrayList<UserManager> logged = new ArrayList<>();
     UserValidatorAdapter validator = new UserValidatorAdapter();
 
     User u = null;
 
     public UserManager() {
     }
-
     public ArrayList<User> get() {
         return this.users;
     }
 
-    public ArrayList<User> getByLogin(String login) {
-        ArrayList<User> selected = new ArrayList<>();
-
+    public User getByLogin(String login) {
         for (User user : users) {
             if (Objects.equals(user.getLogin(), login))
-                selected.add(user);
+              //  logged(user);
+                return user;
         }
-        return selected;
+        return null;
     }
 
     public boolean post(User user) {

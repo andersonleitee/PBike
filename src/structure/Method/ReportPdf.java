@@ -2,24 +2,26 @@ package structure.Method;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
-import model.Dock.Dock;
+import controller.UserManager;
 
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ReportPdf implements Report {
-    private Dock takeBike;
-    private Document documentPDF;
 
-    public ReportPdf(Dock takeBike){
-        this.takeBike = takeBike;
-        this.documentPDF = new Document();
+    private final Document documentPDF;
+    private UserManager userManager = new UserManager();
+    public ReportPdf(UserManager userManager){
+
+       documentPDF = new Document();
         try {
             String destinationReport = "reportPdf.pdf";
             PdfWriter.getInstance(this.documentPDF, new FileOutputStream(destinationReport));
-            this.documentPDF.open();
+            documentPDF.open();
         } catch (DocumentException e) {
             throw new RuntimeException(e);
         } catch (FileNotFoundException e) {
@@ -30,25 +32,30 @@ public class ReportPdf implements Report {
 
 
     @Override
-    public void gerarCabecalho() throws DocumentException {
+    public void header() throws DocumentException {
         Paragraph title = new Paragraph();
         title.setAlignment(Element.ALIGN_TOP); 
         title.add(new Chunk("Relatório de acesso as Bases",new Font(Font.FontFamily.HELVETICA,24)));
-        this.documentPDF.add(title);
+        documentPDF.add(title);
     }
 
-//    @Override
-//    public void gerarCorpo() {
-//
-//    }
-//
-//    @Override
-//    public void gerarRodape() {
-//
-//    }
-//
-//    @Override
-//    public void imprimir() {
-//
-//    }
+    @Override
+    public void body() throws DocumentException {
+
+        List list = new ArrayList<>();
+        for (Object u : userManager.logged){
+            list.add(u);
+        }
+        Paragraph middle = new Paragraph();
+        middle.setAlignment(Element.BODY);
+        documentPDF.add(middle);
+
+    }
+
+    @Override
+    public void print() {
+        if(this.documentPDF != null && this.documentPDF.isOpen()){
+           this.documentPDF.close();
+        }
+    }
 }
