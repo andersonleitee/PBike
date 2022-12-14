@@ -1,10 +1,9 @@
 package model.Bike;
 
-import structural.Factory.Entity;
+import structure.Factory.Entity;
 
 public class Bike implements Entity {
     private int id;
-    private boolean taken = false;
 
     public Bike(){}
 
@@ -18,13 +17,5 @@ public class Bike implements Entity {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public boolean getTaken() {
-        return taken;
-    }
-
-    public void setTaken(boolean taken) {
-        this.taken = taken;
     }
 }

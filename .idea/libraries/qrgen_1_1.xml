@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="qrgen-1.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/externalLibs/qrgen-1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

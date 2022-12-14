@@ -1,7 +1,7 @@
 package model.Bike;
 
-import structural.Factory.Creator;
-import structural.Factory.Entity;
+import structure.Factory.Creator;
+import structure.Factory.Entity;
 
 public class BikeCreator extends Creator {
     int id;
