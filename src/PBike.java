@@ -4,11 +4,9 @@ import structure.Method.ReportPdf;
 import structure.Method.ReportTxt;
 import structure.Singleton.SingletonPBSystem;
 import structure.Singleton.SingletonUserManager;
-import view.CLIPrompts;
 import view.UserPrompts;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class PBike {
     public static void main(String[] args) throws DocumentException, IOException {
@@ -35,7 +33,10 @@ public class PBike {
         reportPdf.header();
         reportPdf.print();
 
-        ReportTxt.text("report.txt",SingletonPBSystem.getInstance().getLoggedUsers().toString());
+         ReportTxt reportTxt = new ReportTxt();
+         reportTxt.body();
+         reportTxt.print();
+
 
     }
 

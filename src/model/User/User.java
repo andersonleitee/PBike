@@ -32,8 +32,7 @@ public class User implements Entity {
     @Override
     public String toString() {
         return
-                "login='" + login + '\'' + "\n" +
-                ", password='" + password + '\'' + "\n"
+                "login='" + login + ","
                 ;
     }
 }
