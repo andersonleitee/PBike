@@ -38,6 +38,8 @@ public class PBike {
          reportTxt.print();
 
 
+        String out = SingletonPBSystem.getInstance().getLoggedUsers();
+        System.out.println(out);
     }
 
 }

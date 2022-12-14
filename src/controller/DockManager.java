@@ -8,29 +8,23 @@ import model.Dock.DockCreator;
 import structure.Factory.Entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DockManager {
-    private ArrayList<Dock> docks = new ArrayList<Dock>();
-    private ArrayList<ArrayList<Bike>> bikesPerDock = new ArrayList<ArrayList<Bike>>();
+    private Map<Integer, Dock> docks = new HashMap<Integer, Dock>();
+    private Map<Integer, ArrayList<Bike>> bikesPerDock = new HashMap<Integer, ArrayList<Bike>>();
     private int idGenerator = 0;
     private DockCreator creator = new DockCreator();
 
     public DockManager(){}
 
     public ArrayList<Dock> get() {
-        return docks;
+        return new ArrayList<Dock>(docks.values());
     }
 
     public Dock getById(int id) {
-        Dock dock = null;
-
-        try {
-            dock = docks.get(id);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return dock;        
+        return docks.get(id);
     }
 
     public int newDock(int capacity) {
@@ -38,10 +32,10 @@ public class DockManager {
         idGenerator++;
 
         creator.setIdAndCapacity(idGenerator, capacity);
-        docks.add((Dock) creator.factoryMethod());
-        bikesPerDock.add(new ArrayList<Bike>());
+        docks.put(idGenerator, (Dock) creator.factoryMethod());
+        bikesPerDock.put(idGenerator, new ArrayList<Bike>());
 
-        return idGenerator - 1;
+        return idGenerator;
     }
 
     public boolean addBike(int dockId, Bike bike) {
@@ -75,18 +69,18 @@ public class DockManager {
         return null;
     }
 
-    // public Dock delete(int id) {
-    //     Dock dock = null;
+    public Dock delete(int id) {
+        Dock dock = null;
 
-    //     try {
-    //         dock = docks.get(id);
-    //         docks.remove(id);
-    //         bikesPerDock.remove(id);
-    //     }
-    //     catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
+        try {
+            dock = docks.get(id);
+            docks.remove(id);
+            bikesPerDock.remove(id);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
-    //     return dock;
-    // }
+        return dock;
+    }
 }
