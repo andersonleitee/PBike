@@ -1,4 +1,4 @@
-package structure.Method;
+package structure.Template;
 
 
 import com.itextpdf.text.DocumentException;
@@ -7,9 +7,9 @@ import structure.Singleton.SingletonPBSystem;
 
 import java.io.*;
 
-public class ReportTxt implements Report{
-    private final BufferedWriter buffer;
+public class ReportTxt extends Report {
     public ReportTxt() throws IOException {
+  
 
         File arq = new File("report.txt");
         FileWriter fileWriter = new FileWriter(arq);
@@ -36,6 +36,7 @@ public class ReportTxt implements Report{
     public void print() throws DocumentException, IOException {
        buffer.close();
     }
+
 
 
 }
