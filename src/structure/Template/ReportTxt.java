@@ -1,22 +1,10 @@
-package structure.Method;
+package structure.Template;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import structure.Singleton.SingletonPBSystem;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 
-public class ReportTxt {
+public class ReportTxt extends Report {
     public static void text(String directory, String body) throws IOException {
         FileWriter createFile;
         createFile = new FileWriter(directory,true );
@@ -27,6 +15,7 @@ public class ReportTxt {
         printWriter.append(body);
 
     }
+
 
 
 //        DocumentBuilderFactory document = DocumentBuilderFactory.newInstance();

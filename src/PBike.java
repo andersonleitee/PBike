@@ -1,14 +1,12 @@
 import com.itextpdf.text.DocumentException;
 import model.User.User;
-import structure.Method.ReportPdf;
-import structure.Method.ReportTxt;
+import structure.Template.ReportPdf;
+import structure.Template.ReportTxt;
 import structure.Singleton.SingletonPBSystem;
 import structure.Singleton.SingletonUserManager;
-import view.CLIPrompts;
 import view.UserPrompts;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class PBike {
     public static void main(String[] args) throws DocumentException, IOException {
