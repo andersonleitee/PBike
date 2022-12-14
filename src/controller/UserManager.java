@@ -33,6 +33,7 @@ public class UserManager {
     public User getByLogin(String login) {
         for (User user : users) {
             if (Objects.equals(user.getLogin(), login))
+              //  logged(user);
                 return user;
         }
         return null;
