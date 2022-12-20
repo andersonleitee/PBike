@@ -1,11 +1,16 @@
 package structure.Mediator;
 
+import controller.DockManager;
 import structure.Memento.UserFavoritesEditor;
 import structure.Memento.UserFavoritesCareTaker;
 
 import structure.Singleton.SingletonDockManager;
 
 import model.Dock.Dock;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserFavoritesMediator extends Mediator {
     private Map<Integer, UserFavoritesEditor> uFavEditors = new HashMap<Integer, UserFavoritesEditor>();
