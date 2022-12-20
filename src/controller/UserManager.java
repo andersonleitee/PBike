@@ -5,9 +5,7 @@ import model.Bike.Bike;
 import model.Dock.Dock;
 
 import structure.Adapter.UserValidatorAdapter;
-import structure.Memento.UserFavoritesEditor;
-import structure.Memento.UserFavoritesCareTaker;
-import structure.Singleton.SingletonDockManager;
+import structure.Mediator.UserFavoritesMediator;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -18,14 +16,11 @@ public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
     private Map<Integer, Bike> bikes = new HashMap<Integer, Bike>();
     private UserValidatorAdapter validator = new UserValidatorAdapter();
-    private Map<Integer, UserFavoritesEditor> uFavEditors = new HashMap<Integer, UserFavoritesEditor>();
-    private Map<Integer, UserFavoritesCareTaker> uFavCareTaker = new HashMap<Integer, UserFavoritesCareTaker>();
-    private final DockManager dockManager = SingletonDockManager.getInstance();
-
-    User u = null;
+    private Mediator mediator = new UserFavoritesMediator();
 
     public UserManager() {
     }
+
     public ArrayList<User> get() {
         return this.users;
     }
@@ -51,8 +46,7 @@ public class UserManager {
     public boolean put(Long id, User user) {
         if (validator.validateUser(user) && id > 0) {
             users.set(id.intValue(), user);
-            uFavEditors.put(id.intValue(), new UserFavoritesEditor());
-            uFavCareTaker.put(id.intValue(), new UserFavoritesCareTaker(uFavEditors.get(id.intValue())));
+            mediator.put(id);
 
             return true;
         } else
@@ -118,31 +112,23 @@ public class UserManager {
     // favorite docks
 
     public void addFavoriteDock(Long userId, int dockId) {
-        uFavEditors.get(userId.intValue()).addFavorite(dockId);
+        mediator.addFavoriteDock(usedId, dockId);
     }
 
     public void removeFavoriteDock(Long userId, int dockId) {
-        uFavEditors.get(userId.intValue()).removeFavorite(dockId);
+        mediator.removeFavoriteDock(userId, dockId);
     }
 
     public void saveFavoriteDocks(Long userId) {
-        uFavCareTaker.get(userId).saveState();
+        mediator.saveFavoriteDocks(userId);
     }
 
     public void restoreLastSavedFavoriteDocks(Long usedId) {
-        uFavCareTaker.get(usedId).undo();
+        mediator.restoreLastSavedFavoriteDocks(userId);
     }
 
     public ArrayList<Dock> getFavoriteDocks(Long userId) {
-        ArrayList<Integer> favoriteDocksIds = new ArrayList<Integer>(
-            uFavEditors.get(userId.intValue()).getFavorites());
-        ArrayList<Dock> favoriteDocks = new ArrayList<Dock>();
-
-        for(int i = 0; i < favoriteDocksIds.size(); i++) {
-            favoriteDocks.add(dockManager.getById(favoriteDocksIds.get(i)));
-        }
-
-        return favoriteDocks;        
+        return mediator.getFavoriteDocks(usedId);
     }
 
 }
