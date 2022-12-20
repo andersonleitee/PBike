@@ -16,7 +16,7 @@ public class UserManager {
     private ArrayList<User> users = new ArrayList<User>();
     private Map<Integer, Bike> bikes = new HashMap<Integer, Bike>();
     private UserValidatorAdapter validator = new UserValidatorAdapter();
-    private Mediator mediator = new UserFavoritesMediator();
+    private UserFavoritesMediator mediator = new UserFavoritesMediator();
 
     public UserManager() {
     }
@@ -112,7 +112,7 @@ public class UserManager {
     // favorite docks
 
     public void addFavoriteDock(Long userId, int dockId) {
-        mediator.addFavoriteDock(usedId, dockId);
+        mediator.addFavoriteDock(userId, dockId);
     }
 
     public void removeFavoriteDock(Long userId, int dockId) {
@@ -124,11 +124,11 @@ public class UserManager {
     }
 
     public void restoreLastSavedFavoriteDocks(Long usedId) {
-        mediator.restoreLastSavedFavoriteDocks(userId);
+        mediator.restoreLastSavedFavoriteDocks(usedId);
     }
 
     public ArrayList<Dock> getFavoriteDocks(Long userId) {
-        return mediator.getFavoriteDocks(usedId);
+        return mediator.getFavoriteDocks(userId);
     }
 
 }
