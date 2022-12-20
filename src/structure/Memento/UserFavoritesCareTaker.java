@@ -1,7 +1,5 @@
 package structure.Memento;
 
-import java.util.Stack;
-
 public class UserFavoritesCareTaker extends CareTaker {
 
     public UserFavoritesCareTaker(UserFavoritesEditor editor){

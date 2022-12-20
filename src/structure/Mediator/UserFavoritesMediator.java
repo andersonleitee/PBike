@@ -37,8 +37,8 @@ public class UserFavoritesMediator extends Mediator {
         uFavCareTakers.get(userId).saveState();
     }
 
-    public void restoreLastSavedFavoriteDocks(Long usedId) {
-        uFavCareTakers.get(usedId).undo();
+    public void restoreLastSavedFavoriteDocks(Long userId) {
+        uFavCareTakers.get(userId).undo();
     }
 
     public ArrayList<Dock> getFavoriteDocks(Long userId) {

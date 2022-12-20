@@ -123,8 +123,8 @@ public class UserManager {
         mediator.saveFavoriteDocks(userId);
     }
 
-    public void restoreLastSavedFavoriteDocks(Long usedId) {
-        mediator.restoreLastSavedFavoriteDocks(usedId);
+    public void restoreLastSavedFavoriteDocks(Long userId) {
+        mediator.restoreLastSavedFavoriteDocks(userId);
     }
 
     public ArrayList<Dock> getFavoriteDocks(Long userId) {

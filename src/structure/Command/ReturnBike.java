@@ -7,11 +7,13 @@ import structure.Singleton.SingletonUserManager;
 public class ReturnBike implements Command {
     Long idUser;
     int idDock;
+
     public ReturnBike (Long idUser, int idDock) {
         this.idDock = idDock;
         this.idUser = idUser;
 
     }
+    
     public boolean execute() {
         try {
             Bike bike = SingletonUserManager.getInstance().getBike(idUser);
